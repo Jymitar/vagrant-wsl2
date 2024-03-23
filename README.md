@@ -4,59 +4,21 @@
 - Source: [https://github.com/hashicorp/vagrant](https://github.com/hashicorp/vagrant)
 - HashiCorp Discuss: [https://discuss.hashicorp.com/c/vagrant/24](https://discuss.hashicorp.com/c/vagrant/24)
 
-Vagrant is a tool for building and distributing development environments.
+By default, when running Vagrant inside WSL2 instance it uses the hypervisor(VirtualBox, VMware or such) that is set up on the host machine.
+The following repository contains an envar VAGRANT_WSL_NESTED_VIRTUALIZATION which when set to true, allows you to run Vagrant on WSL2 with nested virtualization enabled and VirtualBox installed inside the WSL instance.
 
-Development environments managed by Vagrant can run on local virtualized
-platforms such as VirtualBox or VMware, in the cloud via AWS or OpenStack,
-or in containers such as with Docker or raw LXC.
+# Installing from Source
+Clone the repository locally.
+## Install Ruby
+    sudo apt install ruby-dev
+## Clean bundle cache.
+    bundle clean
+## Install with the following commands
+    bundle install
+    bundle --binstubs exec
+## Add the following to the .bashrc file
+    export PATH="$(dirname ~/vagrant/exec)/exec:$PATH"
+    export VAGRANT_WSL_NESTED_VIRTUALIZATION=true
 
-Vagrant provides the framework and configuration format to create and
-manage complete portable development environments. These development
-environments can live on your computer or in the cloud, and are portable
-between Windows, Mac OS X, and Linux.
+Running vagrant in WSL2 will use the hypervisor installed on the WSL2 instance enabling true nested virtualization.
 
-## Quick Start
-
-Package dependencies: Vagrant requires `bsdtar` and `curl` to be available on
-your system PATH to run successfully.
-
-For the quick-start, we'll bring up a development machine on
-[VirtualBox](https://www.virtualbox.org/) because it is free and works
-on all major platforms. Vagrant can, however, work with almost any
-system such as [OpenStack](https://www.openstack.org/), [VMware](https://www.vmware.com/), [Docker](https://docs.docker.com/), etc.
-
-First, make sure your development machine has
-[VirtualBox](https://www.virtualbox.org/)
-installed. After this,
-[download and install the appropriate Vagrant package for your OS](https://www.vagrantup.com/downloads.html).
-
-To build your first virtual environment:
-
-    vagrant init hashicorp/bionic64
-    vagrant up
-
-Note: The above `vagrant up` command will also trigger Vagrant to download the
-`bionic64` box via the specified URL. Vagrant only does this if it detects that
-the box doesn't already exist on your system.
-
-## Getting Started Guide
-
-To learn how to build a fully functional development environment, follow the
-[getting started guide](https://www.vagrantup.com/docs/getting-started).
-
-## Installing from Source
-
-# Install Ruby
-sudo apt install ruby-dev
-# Clean bundle cache if you have already tried to install
-Clear Bundler Cache
-# Install with the following envvar
-VAGRANT_WSL_NESTED_VIRTUALIZATION=true bundle install
-bundle --binstubs exec
-export PATH="$(dirname ~/vagrant/exec)/exec:$PATH"
-
-## Contributing to Vagrant
-
-Please take time to read the [HashiCorp Community Guidelines](https://www.hashicorp.com/community-guidelines) and the [Vagrant Contributing Guide](https://github.com/hashicorp/vagrant/blob/main/.github/CONTRIBUTING.md).
-
-Then you're good to go!
