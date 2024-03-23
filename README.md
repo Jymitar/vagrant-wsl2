@@ -46,8 +46,14 @@ To learn how to build a fully functional development environment, follow the
 
 ## Installing from Source
 
-If you want the bleeding edge version of Vagrant, we try to keep main pretty stable
-and you're welcome to give it a shot. Please review the installation page [here](https://www.vagrantup.com/docs/installation/source).
+# Install Ruby
+sudo apt install ruby-dev
+# Clean bundle cache if you have already tried to install
+Clear Bundler Cache
+# Install with the following envvar
+VAGRANT_WSL_NESTED_VIRTUALIZATION=true bundle install
+bundle --binstubs exec
+export PATH="$(dirname ~/vagrant/exec)/exec:$PATH"
 
 ## Contributing to Vagrant
 
